@@ -1339,7 +1339,11 @@ public class Calculator extends Activity
      */
     private boolean prepareForHistory() {
         if (mCurrentState == CalculatorState.ANIMATE) {
-            throw new AssertionError("onUserInteraction should have ended animation");
+            try {
+                throw new AssertionError("onUserInteraction should have ended animation");
+            } catch(AssertionError ae) {
+                Log.w(TAG, "caught AssertionError Exception: onUserInteraction should have ended animation");
+            }
         } else if (mCurrentState == CalculatorState.EVALUATE) {
             // Cancel current evaluation
             cancelIfEvaluating(true /* quiet */ );
